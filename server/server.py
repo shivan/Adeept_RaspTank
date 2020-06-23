@@ -203,6 +203,10 @@ def get_cpu_use():
     cpu_cent = psutil.cpu_percent()
     return str(cpu_cent)
 
+def get_wifi_signal():
+    """ wifi signal """
+    res = os.popen('iwconfig wlan0 | grep -i quality').readline()
+    return res.replace("Signal level=", "")
 
 def get_ram_info():
     """ Return RAM usage using psutil """
@@ -222,6 +226,7 @@ def info_get():
         cpu_t = get_cpu_tempfunc()
         cpu_u = get_cpu_use()
         ram_info = get_ram_info()
+        wifi_signal = get_wifi_signal()
         time.sleep(3)
 
 
@@ -234,7 +239,7 @@ def info_send_client():
     print(SERVER_ADDR)
     while 1:
         try:
-            Info_Socket.send((get_cpu_tempfunc()+' '+get_cpu_use()+' '+get_ram_info()).encode())
+            Info_Socket.send((get_cpu_tempfunc()+' '+get_cpu_use()+' '+get_ram_info()+' '+get_wifi_signal()).encode())
             time.sleep(1)
         except:
             pass

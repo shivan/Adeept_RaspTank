@@ -305,7 +305,7 @@ def instruction():
 
 
 def Info_receive():
-    global CPU_TEP,CPU_USE,RAM_USE
+    global CPU_TEP,CPU_USE,RAM_USE, WIFI_SIGNAL
     HOST = ''
     INFO_PORT = 2256                            #Define port serial 
     ADDR = (HOST, INFO_PORT)
@@ -320,11 +320,12 @@ def Info_receive():
             info_data = ''
             info_data = str(InfoSock.recv(BUFSIZ).decode())
             info_get = info_data.split()
-            CPU_TEP,CPU_USE,RAM_USE= info_get
+            CPU_TEP,CPU_USE,RAM_USE,WIFI_SIGNAL= info_get
             #print('cpu_tem:%s\ncpu_use:%s\nram_use:%s'%(CPU_TEP,CPU_USE,RAM_USE))
             CPU_TEP_lab.config(text='CPU Temp: %s℃'%CPU_TEP)
             CPU_USE_lab.config(text='CPU Usage: %s'%CPU_USE)
             RAM_lab.config(text='RAM Usage: %s'%RAM_USE)
+            WIFI_lab.config(text='WIFI: %s'%WIFI_SIGNAL)
         except:
             pass
 
@@ -460,7 +461,7 @@ def set_B(event):
 
 
 def loop():                      #GUI
-    global tcpClicSock,root,E1,connect,l_ip_4,l_ip_5,color_btn,color_text,Btn14,CPU_TEP_lab,CPU_USE_lab,RAM_lab,canvas_ultra,color_text,var_R,var_B,var_G,Btn_Steady,Btn_FindColor,Btn_WatchDog,Btn_Fun4,Btn_Fun5,Btn_Fun6,label_ins   #The value of tcpClicSock changes in the function loop(),would also changes in global so the other functions could use it.
+    global tcpClicSock,root,E1,connect,l_ip_4,l_ip_5,color_btn,color_text,Btn14,CPU_TEP_lab,CPU_USE_lab,RAM_lab,WIFI_lab,canvas_ultra,color_text,var_R,var_B,var_G,Btn_Steady,Btn_FindColor,Btn_WatchDog,Btn_Fun4,Btn_Fun5,Btn_Fun6,label_ins   #The value of tcpClicSock changes in the function loop(),would also changes in global so the other functions could use it.
     while True:
         color_bg='#000000'        #Set background color
         color_text='#E1F5FE'      #Set text color
@@ -490,6 +491,9 @@ def loop():                      #GUI
 
         RAM_lab=tk.Label(root,width=18,text='RAM Usage:',fg=color_text,bg='#212121')
         RAM_lab.place(x=400,y=75)                         #Define a Label and put it in position
+
+        WIFI_lab=tk.Label(root,width=18,text='WIFI:',fg=color_text,bg='#212121')
+        WIFI_lab.place(x=400,y=105)  
 
         l_ip=tk.Label(root,width=18,text='Status',fg=color_text,bg=color_btn)
         l_ip.place(x=30,y=110)                           #Define a Label and put it in position
