@@ -493,7 +493,7 @@ def loop():                      #GUI
         RAM_lab.place(x=400,y=75)                         #Define a Label and put it in position
 
         WIFI_lab=tk.Label(root,width=18,text='WIFI:',fg=color_text,bg='#212121')
-        WIFI_lab.place(x=400,y=105)  
+        WIFI_lab.place(x=400,y=90)  
 
         l_ip=tk.Label(root,width=18,text='Status',fg=color_text,bg=color_btn)
         l_ip.place(x=30,y=110)                           #Define a Label and put it in position
